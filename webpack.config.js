@@ -1,7 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const isDevelopment = process.env.NODE_ENV === 'development';
+const webpack = require('webpack');
 
 module.exports = {
     mode: process.env.NODE_ENV,
@@ -35,6 +36,12 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(jpg|png|jpeg)$/,
+                use: {
+                    loader: 'url-loader'
+                }
+            },
+            {
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: {
@@ -59,6 +66,8 @@ module.exports = {
         ]
     },
     plugins: [
+        isDevelopment && new webpack.HotModuleReplacementPlugin(),
+        isDevelopment && new ReactRefreshWebpackPlugin(),
         new HtmlWebpackPlugin({ template: './index.html' })
     ]
 }

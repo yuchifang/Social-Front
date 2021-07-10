@@ -1,0 +1,10 @@
+import React from 'react'
+import styles from 'styled-components'
+import NavBar from '../../components/NavBar'
+export default function Home() {
+    return (
+        <div>
+            <NavBar />
+        </div>
+    )
+}
