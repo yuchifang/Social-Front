@@ -37,7 +37,7 @@ export default function NavBar() {
                         <WNavBarIconBadge>1</WNavBarIconBadge>
                     </WNavBarIconItem>
                 </WNavBarIcons>
-                <WNavBarImg src={someImg} alt="" />
+                <WNavBarImg src={someImg} alt="fakeImg" />
             </WNavbarRight>
         </WNavbarContainer>
     )
