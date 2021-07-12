@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const isDevelopment = process.env.NODE_ENV === 'development';
 const webpack = require('webpack');
 
@@ -36,11 +37,35 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(jpg|png|jpeg)$/,
-                use: {
-                    loader: 'url-loader'
-                }
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            // 設置 output 時的檔案名稱
+                            name: '[path][name].[ext]',
+                            // 用以限制須轉為 base64 的文件大小 (單位：byte)
+                            limit: 8192,
+                            // 超過大小及調用 file-loader
+                            fallback: require.resolve('file-loader'),
+                        }
+                    },
+                ],
             },
+            // {
+            //     test: /\.(png|jpe?g|gif)$/i,
+            //     use: [
+            //         {
+            //             loader: 'file-loader',
+            //             options: {
+            //                 // 設置 output 時的檔案名稱
+            //                 name: '[path][name].[ext]',
+            //                 // 修改公共路徑
+            //                 // publicPath: '../',
+            //             },
+            //         },
+            //     ],
+            // },
             {
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
@@ -68,6 +93,7 @@ module.exports = {
     plugins: [
         isDevelopment && new webpack.HotModuleReplacementPlugin(),
         isDevelopment && new ReactRefreshWebpackPlugin(),
-        new HtmlWebpackPlugin({ template: './index.html' })
+        new HtmlWebpackPlugin({ template: './index.html' }),
+        // new CleanWebpackPlugin()
     ]
 }

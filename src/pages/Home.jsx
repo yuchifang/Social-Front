@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import NavBar from '../../components/NavBar'
-import SideBar from '../../components/SideBar'
-import Feed from '../../components/Feed'
-import RightBar from '../../components/RightBar'
+import NavBar from '../components/NavBar'
+import SideBar from '../components/SideBar'
+import Feed from '../components/Feed'
+import RightBar from '../components/RightBar'
 
 export default function Home() {
     return (

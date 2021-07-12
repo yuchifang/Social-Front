@@ -12,9 +12,12 @@ import {
     School
 } from '@material-ui/icons'
 import FriendImg from '../assets/person/2.jpeg'
-
+import CloseFriend from './CloseFriend'
+import { Users } from '../dummyData'
 
 export default function SideBar() {
+
+    const RenderCloseFriend = Users.map(user => <CloseFriend user={user} />)
     return (
         <WSideBar>
             <WSideContainer>
@@ -61,32 +64,8 @@ export default function SideBar() {
                 </WSidebarButton>
                 <WSideBarHr />
                 <WSideBarFriendList>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
-                    <WSideBarFriend>
-                        <WSideBarFriendImg src={FriendImg} alt="fakeImg"></WSideBarFriendImg>
-                        <WSideBarFriendName>Jane Doe</WSideBarFriendName>
-                    </WSideBarFriend>
+                    {RenderCloseFriend}
                 </WSideBarFriendList>
-
             </WSideContainer>
         </WSideBar>
     )
@@ -96,6 +75,8 @@ const WSideBar = styled.div`
     flex: 3;
     height:calc(100vh - 50px);
     overflow-y: scroll;
+    position:sticky;
+    top:50px;
     &::-webkit-scrollbar {
         width: 7px;
     }
@@ -189,6 +170,7 @@ const WSideBarFriend = styled.li`
     display:flex;
     align-items:center;
     margin-bottom:15px;
+    width:150px;
 `
 
 const WSideBarFriendImg = styled.img`

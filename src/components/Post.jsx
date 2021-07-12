@@ -1,39 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { MoreVert } from '@material-ui/icons'
-
-import ProfileImg from '../assets/person/1.jpeg'
-import PostImg from '../assets/post/1.jpeg'
 import heartImg from '../assets/heart.png'
 import likeImg from '../assets/like.png'
+import { Users } from '../dummyData'
 
-export default function Post() {
+const image = require.context('../', true)
+
+export default function Post({ post }) {
+    const [like, setLike] = useState(post?.like)
+    const [isLike, setIsLike] = useState(false)
+
+    const users = Users.find(user => user.id === post?.userId)
+    const userProfileImg = users?.profilePicture ? image(`./${users?.profilePicture}`)?.default : ""
+    const postImg = post?.photo ? image(`./${post?.photo}`)?.default : ""
+
+
+    const postDate = post.date
+    const postDesc = post?.desc
+    const postComment = post?.comment
+    const userName = users.username
+
+
+
+    const handleLike = () => {
+        setIsLike(prevState => !prevState)
+        setLike(prevState => isLike ? prevState - 1 : prevState + 1)
+    }
+
     return (
         <WPost>
             <WPostContainer>
                 <WPostTop>
                     <WPostTopLeft>
-                        <WPostProfileImg src={ProfileImg} alt="fakeImg" />
-                        <WPostUsername>Something</WPostUsername>
-                        <WPostDate>5 min go</WPostDate>
+                        <WPostProfileImg src={userProfileImg} alt="fakeImg" />
+                        <WPostUsername>{userName}</WPostUsername>
+                        <WPostDate>{postDate}</WPostDate>
                     </WPostTopLeft>
                     <WPostTopRight>
                         <WMoreVertIcon />
                     </WPostTopRight>
                 </WPostTop>
                 <WPostCenter>
-                    <WPostText>Hey its my first post</WPostText>
-                    <WPostImg src={PostImg} alt="fakeImg" />
+                    <WPostText>{postDesc}</WPostText>
+                    <WPostImg src={postImg} alt="fakeImg" />
                 </WPostCenter>
                 <WPostBottom>
                     <WPostBottomLeft>
-                        <WLeftPostIcon src={heartImg} />
-                        <WLeftPostIcon src={likeImg} />
-                        <WPostLikeCounter>32 people like it</WPostLikeCounter>
+                        <WLeftPostIcon src={likeImg} onClick={handleLike} />
+                        <WPostLikeCounter>{like} people like it</WPostLikeCounter>
                     </WPostBottomLeft>
                     <WPostBottomRight>
                         <WPostCommentText>
-                            9 comments
+                            {postComment} comments
                         </WPostCommentText>
                     </WPostBottomRight>
                 </WPostBottom>
@@ -94,7 +113,11 @@ const WPostCenter = styled.div`
 
 const WPostText = styled.span``;
 
-const WPostImg = styled.img`
+const WPostImg = styled.img
+    // .attrs({
+    //     src: window.location.origin + "/assets/post/2.jpeg"
+    // })
+    `
     margin-top: 20px;
     width: 100%;
     max-height: 500px;

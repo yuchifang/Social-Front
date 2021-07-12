@@ -2,9 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import BirthdayImg from '../assets/gift.png'
 import AdImg from '../assets/ad.png'
-import PersonImg from '../assets/person/3.jpeg'
+
+import { Users } from '../dummyData'
+import OnlineFriend from './OnlineFriend'
 
 export default function RightBar() {
+
+    const RenderUser = Users.map(user => <OnlineFriend key={user.id} user={user} />)
     return (
         <WRightBar>
             <WRightBarContainer>
@@ -17,56 +21,7 @@ export default function RightBar() {
                 <WRightBarAd src={AdImg} alt="adImg" />
                 <WRightTitle>Online Friends</WRightTitle>
                 <WRightBarFriendList>
-                    <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>
-                    <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>  <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>  <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>  <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>  <WRightBarFriend>
-                        <WRightBarProfileImgContainer>
-                            <WRightBarProfileImg src={PersonImg} alt="person" />
-                            <WRightBarOnline />
-                        </WRightBarProfileImgContainer>
-                        <WRightBarUsername>
-                            John Carter
-                        </WRightBarUsername>
-                    </WRightBarFriend>
+                    {RenderUser}
                 </WRightBarFriendList>
             </WRightBarContainer>
         </WRightBar>
@@ -74,7 +29,9 @@ export default function RightBar() {
 }
 
 const WRightBar = styled.div`
-    flex: 3.5
+    flex: 3.5;
+    overflow-y: scroll;
+    height: calc(100vh - 50px);
 `
 
 const WRightBarContainer = styled.div`
@@ -111,35 +68,3 @@ const WRightBarFriendList = styled.ul`
 
 `
 
-const WRightBarFriend = styled.li`
-    display:flex;
-    align-items: center;
-    margin-bottom: 15px;
-`
-
-const WRightBarProfileImgContainer = styled.div`
-    margin-right: 10px;
-    position: relative;
-`;
-
-const WRightBarProfileImg = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-`
-
-const WRightBarOnline = styled.span`
-    width:12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color:limegreen;
-    position:absolute;
-    top: -2px;
-    right:0;
-    border:2px solid white;
-`
-
-const WRightBarUsername = styled.div`
-    font-weight: bold;
-`

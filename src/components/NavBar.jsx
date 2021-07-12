@@ -51,6 +51,7 @@ const WNavbarContainer = styled.div`
     background-color:#1877f2;
     position:sticky;
     top:0;
+    z-index:10;
 `
 
 const WNavbarLeft = styled.div`
