@@ -6,8 +6,8 @@ import Profile from './pages/Profile'
 export default function App() {
     return (
         <div>
-            <Home />
-            {/* <Profile /> */}
+            {/* <Home /> */}
+            <Profile />
         </div>
     )
 }
