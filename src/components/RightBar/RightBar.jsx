@@ -9,7 +9,7 @@ export default function RightBar({ profile }) {
     return (
         <WRightBar>
             <WRightBarContainer>
-                {profile ? <HomeRightBar /> : <ProfileRightBar />}
+                {profile ? <ProfileRightBar /> : <HomeRightBar />}
             </WRightBarContainer>
         </WRightBar>
     )
